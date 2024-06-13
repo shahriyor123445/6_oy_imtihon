@@ -6,7 +6,7 @@ const passwordInput = document.getElementById("password");
 window.addEventListener("DOMContentLoaded", function () {
   const hasToken = checkToken();
   if (hasToken) {
-    redirect("/admin.html");
+    redirect("/index.html");
   }
 });
 
@@ -46,14 +46,13 @@ async function login() {
     if (access_token && refresh_token) {
       sessionStorage.setItem("access_token", access_token);
       localStorage.setItem("refresh_token", refresh_token);
-  
+
       const hasToken = checkToken();
       if (hasToken) {
-        redirect("/admin.html");
+        redirect("/index.html");
       }
-    } 
+    }
   } catch (error) {
-    
     console.error(error);
   }
 }

@@ -1,38 +1,26 @@
-// document.getElementById('userForm').addEventListener('submit', function(event) {
-//     event.preventDefault(); // Formni jo'natishni to'xtatish
-
-//     // Input qiymatlarini olish
-//     const productTitle = document.getElementById('title').value;
-//     const productPrice = document.getElementById('price').value;
-//     const productDescription = document.getElementById('description').value;
-
-//  console.log(productDescription, productPrice, productTitle)
-//     // Obyekt yaratish,
-//     const user = {
-//         productTitle: productTitle,
-//         productPrice: productPrice,
-//         productDescription: productDescription
-//     };
-
-//     // userInfo div elementiga foydalanuvchi ma'lumotlarini qo'shish
-//     const userInfoDiv = document.getElementById('userInfo');
-//     const userDiv = document.createElement('div');
-//     userDiv.textContent = user;
-//     userInfoDiv.appendChild(userDiv);
-
-//     // Formani tozalash
-//     document.getElementById('userForm').reset();
-// });
-
 const title = document.getElementById("title");
 const price = document.getElementById("price");
 const description = document.getElementById("description");
 const userInfo = document.getElementById("list");
+const btnSubmit = document.getElementById("btnSubmit");
+btnSubmit.disabled = false;
 
 const form = document.forms[0];
 const products = [];
+function tekshirish() {
+  if (title.value && price.value && description.value) {
+    btnSubmit.disabled = false;
+  } else {
+    btnSubmit.disabled = true;
+  }
+}
+
+title.addEventListener("input", tekshirish);
+price.addEventListener("input", tekshirish);
+description.addEventListener("input", tekshirish);
 
 form.onsubmit = function (event) {
+  tekshirish();
   event.preventDefault();
 
   const newProduct = {
@@ -51,10 +39,10 @@ form.onsubmit = function (event) {
 };
 
 function updateProductList() {
-  userInfo.innerHTML = ""; 
+  userInfo.innerHTML = "";
 
   products.map((item) => {
-    const li = document.createElement("li")
+    const li = document.createElement("li");
     const listItem = document.createElement("div");
     const pri = document.createElement("div");
     const div = document.createElement("div");
@@ -65,8 +53,6 @@ function updateProductList() {
     li.appendChild(listItem);
     li.appendChild(pri);
     li.appendChild(div);
-    userInfo.appendChild(li)
+    userInfo.appendChild(li);
   });
 }
-
-

@@ -1,7 +1,7 @@
-const form = document.getElementById('loginForm');
+const form = document.getElementById("loginForm");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
-
+const loginButton = document.getElementById("loginButton");
 
 window.addEventListener("DOMContentLoaded", function () {
   const hasToken = checkToken();
@@ -15,18 +15,27 @@ const credentials = {
   password: "",
 };
 
-emailInput.oninput = function (event) {
-  credentials.email = event.target.value;
-};
+function tekshirish() {
+  const email = emailInput.value.trim();
+  const password = passwordInput.value.trim();
+  loginButton.disabled = !(email && password);
+}
 
-passwordInput.oninput = function (event) {
+emailInput.addEventListener("input", function (event) {
+  credentials.email = event.target.value;
+  tekshirish();
+});
+
+passwordInput.addEventListener("input", function (event) {
   credentials.password = event.target.value;
-};
+  tekshirish();
+});
 
 form.onsubmit = function (event) {
   event.preventDefault();
-
-  login();
+  if (!loginButton.disabled) {
+    login();
+  }
 };
 
 async function login() {
@@ -65,3 +74,5 @@ function checkToken() {
 function redirect(path) {
   window.location.href = path;
 }
+
+tekshirish();

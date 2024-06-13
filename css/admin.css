@@ -67,7 +67,8 @@ button {
   border-radius: 20px;
 }
 #list {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
   gap: 30px;
   margin-top: 20px;
 }
